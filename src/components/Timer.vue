@@ -6,7 +6,7 @@
       ...highlightStyle,
     }"
   >
-    <div :class="$style.display">{{ displayDuration }}</div>
+    <div :class="$style.display">{{ displayDurationFormatted }}</div>
     <div :class="$style.buttons">
       <IconButton :class="highlightStyle" @click="onPauseClick" v-if="isActive">
         <Pause />
@@ -46,6 +46,36 @@ const { pause, resume, isActive } = useRafFn(
 
 const highlightStyle = computed(() => {
   return { [style.highlighted]: isActive.value }
+})
+
+const displayDurationFormatted = computed(() => {
+  const hour = 60 * 60 * 1000
+  const minute = 60 * 1000
+  const second = 1000
+  let totalMs = displayDuration.value
+
+  const milliseconds = totalMs % second
+  totalMs -= milliseconds
+
+  const seconds = (totalMs % minute) / second
+  totalMs -= seconds * second
+
+  const minutes = (totalMs % hour) / minute
+  totalMs -= minutes * minute
+
+  const hours = totalMs / hour
+
+  let output = seconds.toString()
+  if (minutes > 0) {
+    const secondsStr = seconds.toString().padStart(2, '0')
+    if (hours > 0) {
+      output = `${hours}:${minutes.toString().padStart(2, '0')}:${secondsStr}`
+    } else {
+      output = `${minutes}:${secondsStr}`
+    }
+  }
+
+  return output
 })
 
 const onRunClick = () => {

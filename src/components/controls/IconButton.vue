@@ -15,5 +15,13 @@
   border: none;
   background-color: transparent;
   color: map-get($palette, gray, button);
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
 }
 </style>
