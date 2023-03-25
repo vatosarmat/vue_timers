@@ -1,5 +1,11 @@
 <template>
-  <ul :class="$style.root">
+  <ul
+    :class="{
+      [$style.root]: true,
+      [$style['one-column']]: ids.length === 0,
+      [$style['two-columns']]: ids.length === 1,
+    }"
+  >
     <Timer tag="li" v-for="id in ids" :key="id" />
     <div className="component-card">
       <IconButton @click="onNewTimerClick"><Plus /></IconButton>
@@ -34,15 +40,33 @@ const onNewTimerClick = () => {
   grid-template-columns: auto;
 }
 
+.root.one-column {
+}
+
+.root.two-columns {
+}
+
 @media (width >= 768px) {
   .root {
     grid-template-columns: repeat(2, auto);
+  }
+
+  .root.one-column {
+    grid-template-columns: auto;
   }
 }
 
 @media (width >= 1024px) {
   .root {
     grid-template-columns: repeat(3, auto);
+  }
+
+  .root.two-columns {
+    grid-template-columns: repeat(2, auto);
+  }
+
+  .root.one-column {
+    grid-template-columns: auto;
   }
 }
 </style>
