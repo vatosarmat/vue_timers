@@ -1,6 +1,11 @@
 :root {
 }
 
+@font-face {
+  font-family: 'Gotham Pro';
+  src: url('gothampro.ttf') format('truetype');
+}
+
 body {
   margin: 0;
   background-color: map-get($palette, gray, black);

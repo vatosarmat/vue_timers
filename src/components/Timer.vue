@@ -76,6 +76,10 @@ const onResetClick = () => {
   justify-content: center;
   text-align: center;
   border-bottom: solid 1px;
+
+  font-family: Gotham Pro;
+  font-weight: 400;
+  font-size: 22px;
 }
 
 .root {
