@@ -1,10 +1,10 @@
 <template>
-  <div :class="$style.root">
-    <Timer v-for="id in ids" :key="id" />
+  <ul :class="$style.root">
+    <Timer tag="li" v-for="id in ids" :key="id" />
     <div className="component-card">
       <IconButton @click="onNewTimerClick"><Plus /></IconButton>
     </div>
-  </div>
+  </ul>
 </template>
 
 <script setup lang="ts">

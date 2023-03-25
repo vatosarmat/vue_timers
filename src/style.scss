@@ -13,10 +13,20 @@ body {
 
 button {
   padding: 0;
-  box-sizing: border-box;
   cursor: pointer;
 }
 
-div {
+div,
+li,
+button {
   box-sizing: border-box;
+}
+
+li,
+ul {
+  list-style-type: none;
+}
+
+ul {
+  margin: 0;
 }

@@ -1,5 +1,6 @@
 <template>
-  <div
+  <component
+    :is="props.tag"
     :class="{
       'component-card': true,
       [$style.root]: true,
@@ -18,7 +19,7 @@
         <Square />
       </IconButton>
     </div>
-  </div>
+  </component>
 </template>
 
 <script setup lang="ts">
@@ -29,6 +30,15 @@ import IconButton from './controls/IconButton.vue'
 import Triangle from './icons/Triangle.vue'
 import Pause from './icons/Pause.vue'
 import Square from './icons/Square.vue'
+
+const props = withDefaults(
+  defineProps<{
+    tag: 'div' | 'li'
+  }>(),
+  {
+    tag: 'div',
+  }
+)
 
 const runMoment = ref<null | number>(null)
 const collectedDuration = ref(0)
