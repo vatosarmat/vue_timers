@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ isHighlighted?: boolean }>()
+//
 </script>
 
 <style module lang="scss">
@@ -15,9 +15,5 @@ const props = defineProps<{ isHighlighted?: boolean }>()
   border: none;
   background-color: transparent;
   color: map-get($palette, gray, button);
-}
-
-.highlighted {
-  color: map-get($palette, gray, white);
 }
 </style>

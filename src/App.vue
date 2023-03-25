@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.root">
     <Timer v-for="id in ids" :key="id" />
-    <div className="card">
+    <div className="component-card">
       <IconButton @click="onNewTimerClick"><Plus /></IconButton>
     </div>
   </div>

@@ -1,14 +1,20 @@
 <template>
-  <div className="card">
+  <div
+    :class="{
+      'component-card': true,
+      [$style.root]: true,
+      ...highlightStyle,
+    }"
+  >
     <div :class="$style.display">{{ displayDuration }}</div>
     <div :class="$style.buttons">
-      <IconButton @click="onPauseClick" v-if="isActive">
+      <IconButton :class="highlightStyle" @click="onPauseClick" v-if="isActive">
         <Pause />
       </IconButton>
-      <IconButton @click="onRunClick" v-else>
+      <IconButton :class="highlightStyle" @click="onRunClick" v-else>
         <Triangle />
       </IconButton>
-      <IconButton @click="onResetClick">
+      <IconButton :class="highlightStyle" @click="onResetClick">
         <Square />
       </IconButton>
     </div>
@@ -16,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, useCssModule, computed } from 'vue'
 import { useRafFn } from '@vueuse/core'
 
 import IconButton from './controls/IconButton.vue'
@@ -28,6 +34,7 @@ const runMoment = ref<null | number>(null)
 const collectedDuration = ref(0)
 const displayDuration = ref(0)
 
+const style = useCssModule()
 const { pause, resume, isActive } = useRafFn(
   () => {
     if (runMoment.value !== null) {
@@ -36,6 +43,10 @@ const { pause, resume, isActive } = useRafFn(
   },
   { immediate: false }
 )
+
+const highlightStyle = computed(() => {
+  return { [style.highlighted]: isActive.value }
+})
 
 const onRunClick = () => {
   runMoment.value = Date.now()
@@ -65,8 +76,25 @@ const onResetClick = () => {
   justify-content: center;
   text-align: center;
   border-bottom: solid 1px;
-  border-color: map-get($palette, gray, white);
-  color: map-get($palette, gray, white);
+}
+
+.root {
+  color: map-get($palette, gray, button);
+
+  .display {
+    border-color: map-get($palette, gray, button);
+  }
+}
+
+.root.highlighted {
+  .display {
+    color: map-get($palette, gray, white);
+    border-color: map-get($palette, gray, white);
+  }
+
+  .highlighted {
+    color: map-get($palette, gray, white);
+  }
 }
 
 .buttons {

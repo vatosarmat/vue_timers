@@ -1,11 +1,7 @@
 @use './theme.scss' as *;
 @forward './theme.scss';
 
-body {
-  background-color: map-get($palette, gray, black);
-}
-
-.card {
+.component-card {
   display: flex;
   align-items: center;
   justify-content: center;
