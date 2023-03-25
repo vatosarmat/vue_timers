@@ -26,10 +26,23 @@ const onNewTimerClick = () => {
 .root {
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(3, auto);
   column-gap: map-get($layout, spacing) * 10;
   row-gap: map-get($layout, spacing) * 9;
   padding-top: map-get($layout, spacing) * 14 + 2px;
   padding-bottom: map-get($layout, spacing) * 14 + 2px;
+
+  grid-template-columns: auto;
+}
+
+@media (width >= 768px) {
+  .root {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+
+@media (width >= 1024px) {
+  .root {
+    grid-template-columns: repeat(3, auto);
+  }
 }
 </style>
