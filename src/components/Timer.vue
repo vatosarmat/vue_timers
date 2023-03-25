@@ -26,6 +26,7 @@
 import { ref, useCssModule, computed } from 'vue'
 import { useRafFn } from '@vueuse/core'
 
+import { formatDuration } from '@/utils'
 import IconButton from './controls/IconButton.vue'
 import Triangle from './icons/Triangle.vue'
 import Pause from './icons/Pause.vue'
@@ -58,37 +59,7 @@ const highlightStyle = computed(() => {
   return { [style.highlighted]: isActive.value }
 })
 
-const durationFormat = (duration: number) => {
-  const hour = 60 * 60 * 1000
-  const minute = 60 * 1000
-  const second = 1000
-  let totalMs = duration
-  let outputStr = ''
-
-  const milliseconds = totalMs % second
-  totalMs -= milliseconds
-
-  const seconds = (totalMs % minute) / second
-  totalMs -= seconds * second
-  if (totalMs > 0) {
-    outputStr = seconds.toString().padStart(2, '0')
-  } else {
-    return seconds
-  }
-
-  const minutes = (totalMs % hour) / minute
-  totalMs -= minutes * minute
-  if (totalMs > 0) {
-    outputStr = `${minutes.toString().padStart(2, '0')}:${outputStr}`
-  } else {
-    return `${minutes}:${outputStr}`
-  }
-
-  const hours = totalMs / hour
-  return `${hours}:${outputStr}`
-}
-
-const displayDurationFormatted = computed(() => durationFormat(displayDuration.value))
+const displayDurationFormatted = computed(() => formatDuration(displayDuration.value))
 
 const onRunClick = () => {
   runMoment.value = Date.now()
