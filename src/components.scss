@@ -1,0 +1,16 @@
+@use './theme.scss' as *;
+@forward './theme.scss';
+
+body {
+  background-color: map-get($palette, gray, black);
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: map-get($layout, block, width);
+  height: map-get($layout, block, height);
+  background-color: map-get($palette, gray, cardBg);
+}

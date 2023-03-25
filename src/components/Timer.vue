@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.root">
+  <div className="card">
     <div :class="$style.display">{{ displayDuration }}</div>
     <div :class="$style.buttons">
       <IconButton @click="onPauseClick" v-if="isActive">
@@ -57,15 +57,8 @@ const onResetClick = () => {
 </script>
 
 <style module lang="scss">
-.root {
-  display: flex;
-  flex-direction: column;
-  width: map-get($layout, block, width);
-  height: map-get($layout, block, height);
-  background-color: map-get($palette, gray, timerBg);
-}
-
 .display {
+  width: 100%;
   flex-grow: 1;
   display: flex;
   align-items: center;
